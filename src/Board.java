@@ -37,10 +37,11 @@ public class Board {
 
 		// Process board
 		String line;
-		for (int l = 1; l < 6; l++) {
+		for (int l = 1; l < 7; l++) {
 			line = lines[l];
 			for (int i = 0; i < 5; i++) {
 				this.board[l - 1][i] = line.charAt(i);
+				System.out.println("prcess board: "+line.charAt(i));
 			}
 		}
 		assert(this.board[5][4] == 'P');
@@ -56,14 +57,15 @@ public class Board {
 		for (int l = 0; l < 6; l++) {
 			for (int i = 0; i < 5; i++) {
 				output += (char)this.board[l][i];
+				System.out.println("toString: " + board[l][i]);
 			}
 			output += ls;
 		}
-
 		return output;
 	}
 
 	public void print(OutputStream os) {
 
 	}
+	
 }
