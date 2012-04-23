@@ -40,9 +40,10 @@ public class Board {
 		for (int l = 1; l < 6; l++) {
 			line = lines[l];
 			for (int i = 0; i < 5; i++) {
-				board[l - 1][i] = line.charAt(i);
+				this.board[l - 1][i] = line.charAt(i);
 			}
 		}
+		assert(this.board[5][4] == 'P');
 	}
 
 	public Board(InputStream is) {
@@ -54,7 +55,7 @@ public class Board {
 		String output = moveNum + " " + onMove + ls;
 		for (int l = 0; l < 6; l++) {
 			for (int i = 0; i < 5; i++) {
-				output += board[l][i];
+				output += (char)this.board[l][i];
 			}
 			output += ls;
 		}
