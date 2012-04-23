@@ -1,9 +1,13 @@
-// Copyright � 2012 Christian Kollross
+// Copyright (c) 2012 Christian Kollross
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 // imcs.svcs.cs.pdx.edu:3589
 
@@ -48,12 +52,20 @@ public class Board {
 				this.board[l - 1][i] = line.charAt(i);
 			}
 		}
-		assert (this.board[5][4] == 'P');
+		assert(moveNum > 0 && moveNum <= 40);
+		assert (onMove == 'B' || onMove == 'W');
 	}
 
-	public Board(InputStream is) {
-		// InputStreamReader isr = new InputStreamReader(is);
+	public Board(InputStream is) throws IOException {
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		String read = br.readLine();
 
+		while(read != null) {
+		    System.out.println(read);
+		    read = br.readLine();
+		}
+		setBoard(read);
 	}
 
 	public String toString() {
@@ -68,7 +80,20 @@ public class Board {
 	}
 
 	public void print(OutputStream os) {
+		  BufferedWriter bw = new BufferedWriter( new PrintWriter(os ) );
+		    
+		    try
+		    {
+		        bw.write( this.toString() );
+		        bw.flush();
+		    }
+		    catch ( IOException e ) { e.printStackTrace(); }
 
+	}
+	
+	public static void main(String[]args) {
+		Board bo = new Board();
+		bo.print(System.out);
 	}
 
 }
