@@ -20,5 +20,8 @@ public class Move {
 	public String toString() {
 		return "";
 	}
+	private static void main(String [] Args) {
+		// für tests
+	}
 }
 
