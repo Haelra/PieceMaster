@@ -1,4 +1,4 @@
-// Copyright � 2012 Christian Kollross
+// Copyright (c) 2012 Christian Kollross
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -48,7 +48,8 @@ public class Board {
 				this.board[l - 1][i] = line.charAt(i);
 			}
 		}
-		assert (this.board[5][4] == 'P');
+		assert(moveNum > 0 && moveNum <= 40);
+		assert (onMove == 'B' || onMove == 'W');
 	}
 
 	public Board(InputStream is) {
