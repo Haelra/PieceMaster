@@ -11,28 +11,33 @@ public class Board {
 
 	private char[][] board = new char[6][5];
 
-	private int moveNum = 1;
+	private int moveNum = -1;
 
-	private char onMove = 'W';
+	private char onMove = '?';
 
-	private String ls = "\n\r"; // line separator
+	private String ls = "\n"; // line separator
 
 	public Board() {
 		String intialSetup = "1 W" + ls + "kqbnr" + ls + "ppppp" + ls + "....."
 				+ ls + "....." + ls + "PPPPP" + ls + "RNBQK";
-		new Board(intialSetup);
+		setBoard(intialSetup);
 	}
 
 	public Board(String input) {
+		setBoard(input);
+	}
+
+	public void setBoard(String input) {
 		String[] lines = input.split(ls);
+		assert (lines.length == 7);
 
 		// Process first line
 		String firstLine = lines[0];
 		String moveNumText = firstLine.split(" ")[0];
 		moveNum = Integer.parseInt(moveNumText);
 		for (int i = 0; i < firstLine.length(); i++) {
-			if (firstLine.charAt(0) == 'W' || firstLine.charAt(0) == 'B')
-				onMove = firstLine.charAt(0);
+			if (firstLine.charAt(i) == 'W' || firstLine.charAt(i) == 'B')
+				onMove = firstLine.charAt(i);
 		}
 
 		// Process board
@@ -41,10 +46,9 @@ public class Board {
 			line = lines[l];
 			for (int i = 0; i < 5; i++) {
 				this.board[l - 1][i] = line.charAt(i);
-				System.out.println("prcess board: "+line.charAt(i));
 			}
 		}
-		assert(this.board[5][4] == 'P');
+		assert (this.board[5][4] == 'P');
 	}
 
 	public Board(InputStream is) {
@@ -56,8 +60,7 @@ public class Board {
 		String output = moveNum + " " + onMove + ls;
 		for (int l = 0; l < 6; l++) {
 			for (int i = 0; i < 5; i++) {
-				output += (char)this.board[l][i];
-				System.out.println("toString: " + board[l][i]);
+				output += (char) this.board[l][i];
 			}
 			output += ls;
 		}
@@ -67,5 +70,5 @@ public class Board {
 	public void print(OutputStream os) {
 
 	}
-	
+
 }
