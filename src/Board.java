@@ -1,6 +1,8 @@
 // Copyright (c) 2012 Christian Kollross
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -52,9 +54,16 @@ public class Board {
 		assert (onMove == 'B' || onMove == 'W');
 	}
 
-	public Board(InputStream is) {
-		// InputStreamReader isr = new InputStreamReader(is);
+	public Board(InputStream is) throws IOException {
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		String read = br.readLine();
 
+		while(read != null) {
+		    System.out.println(read);
+		    read = br.readLine();
+		}
+		setBoard(read);
 	}
 
 	public String toString() {
